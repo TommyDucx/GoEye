@@ -25,3 +25,4 @@ env/
 .DS_Store
 .idea/
 .vscode/
+assets/*.iconset/

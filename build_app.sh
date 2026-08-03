@@ -47,6 +47,7 @@ rm -rf build dist
   --noconfirm \
   --osx-bundle-identifier com.goeye.app \
   --hidden-import goeye \
+  --icon assets/GoEye.icns \
   "${EXTRA_DATA[@]}" \
   macos_main.py
 
