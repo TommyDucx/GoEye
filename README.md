@@ -183,3 +183,24 @@ goeye/
 - 本开发沙箱（Intel Mac + 代理限制）无法实跑 KataGo 子进程，因此**端到端 KataGo 分析未在此环境实跑**；
   但其 JSON 解析已单测覆盖、权重已验证完整，你本机 `brew install katago` 后即可打通。
 - GNU Go 的 GTP 对接已用模拟引擎完整测试通过。
+
+---
+
+## 十、打包成 macOS .app（可选发布）
+
+`build_app.sh` 用 PyInstaller 把项目打包成独立 `GoEye.app`（无需 Python 环境即可运行）。
+
+```bash
+# 一次性安装打包工具（你来控制安装）
+/Users/tommydu/.workbuddy/binaries/python/envs/default/bin/pip install pyinstaller
+
+./build_app.sh            # 生成 dist/GoEye.app
+./build_app.sh --dmg      # 额外生成 dist/GoEye.dmg
+
+# 首次打开未签名 App：
+xattr -cr dist/GoEye.app && open dist/GoEye.app
+```
+
+- 本地 `models/` 里的 KataGo 权重会被自动打进 `.app`，开箱即用；若 `models/` 不存在，App 仍可用 GNU Go 后备或仅识别模式。
+- 打包后用系统"屏幕录制"授权给 `GoEye.app` 本体（见第四节），否则会黑屏。
+- 未签名的 `.app` 在别人的 Mac 上会被 Gatekeeper 拦截，本机 `xattr -cr` 后可正常打开。

@@ -10,7 +10,13 @@ from typing import Optional
 
 from .config import Settings
 
-MODELS_DIR = Path(__file__).resolve().parent.parent / "models"
+# When frozen by PyInstaller the weights are bundled next to the payload
+# (added via ``--add-data models:models``), so look there first.
+if getattr(sys, "frozen", False):
+    _BASE = Path(sys._MEIPASS)
+else:
+    _BASE = Path(__file__).resolve().parent.parent
+MODELS_DIR = _BASE / "models"
 # Larger nets first: whichever is present and loads wins.
 MODEL_PREFERENCE = ["g170e-b15c192", "g170e-b10c128"]
 
