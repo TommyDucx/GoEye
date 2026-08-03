@@ -48,7 +48,7 @@ rm -rf build dist
   --osx-bundle-identifier com.goeye.app \
   --hidden-import goeye \
   "${EXTRA_DATA[@]}" \
-  goeye/__main__.py
+  macos_main.py
 
 echo "Built: dist/GoEye.app"
 
